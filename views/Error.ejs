@@ -1,0 +1,11 @@
+<% layout('./layouts/BoilerPlate') %> 
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Error!</h4>
+            <p><%= err.message %> <%= err.statusCode %> </p>
+            <hr>
+            <p class="mb-0"><a href="/campgrounds">Go Back Home</a></p>
+          </div>
+    </div>
+</div>

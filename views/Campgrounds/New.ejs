@@ -1,0 +1,53 @@
+<% layout('./layouts/BoilerPlate') %> 
+
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h1 class="text-center">Add New Campground</h1>
+          <form action="/campgrounds" method="post" novalidate class="validate-form" enctype="multipart/form-data">
+            <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="campground[title]" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            </div>
+           
+            <div class=" mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" name="campground[location]" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            </div>
+
+          
+              <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Add Image(S)</label>
+                <input class="form-control" type="file"  name="image" id="formFileMultiple" multiple>
+              </div>
+
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+               <textarea class="form-control" name="campground[description]" id="description" cols="20" rows="3" required></textarea>
+               <div class="valid-feedback">
+                Looks good!
+              </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="price" class="form-label">Price</label>
+                  <div class="input-group">
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input type="number" class="form-control" id="price" name="campground[price]" aria-label="Amount (to the nearest dollar)" required>
+                    <span class="input-group-text">.00</span>
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  
+                </div>
+          
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+        </div>
+      </div>

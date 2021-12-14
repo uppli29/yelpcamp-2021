@@ -1,0 +1,67 @@
+<% layout('./layouts/BoilerPlate') %> 
+
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h1 class="text-center">Edit Campground</h1>
+          <form action="/campgrounds/<%= campGround._id %>?_method=PUT"  method="POST" class="validate-form" novalidate enctype="multipart/form-data">
+        
+            <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="campground[title]" value=<%=campGround.title  %> required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            </div>
+            
+            <div class=" mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" name="campground[location]"  value=<%=campGround.location%> required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            </div>
+
+            <div class=" mb-3">
+              <label for="image" class="form-label">Add Images </label>
+              <input type="file" name="image" id="image" multiple>
+              </div>
+
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+               <textarea class="form-control" name="campground[description]" id="description" cols="20" rows="3" required><%=campGround.description%></textarea>
+               <div class="valid-feedback">
+                Looks good!
+              </div>
+                </div>
+
+                <div class="mb-3">
+
+                  <label for="price" class="form-label">Price</label>
+                  <div class="input-group">
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input type="number" class="form-control" id="price" name="campground[price]" aria-label="Amount (to the nearest dollar)" value=<%=campGround.price%> required>
+                    <span class="input-group-text">.00</span>
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div class="mb-3">
+                  <% campGround.images.forEach(function(img, i) {  %>
+                    <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+                    <div class="form-check-inline">
+                        <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                    </div>
+                    <label for="image-<%=i%>">Delete?</label>
+                    <% })%>
+                </div>
+          
+                <button type="submit" class="btn btn-info">Edit</button>
+        </form>
+        </div>
+      </div>
+      
+
+ 

@@ -1,0 +1,40 @@
+<% layout('./layouts/BoilerPlate') %> 
+    <h1 class="dispaly-2 text-center mb-3">All Campgrounds</h1>
+    <div id="map" class="mb-3" style="width: 100%; height:400px"></div>
+    
+    <ul>
+        <% for(let campground of campgrounds){  %>
+            
+       <!-- bootstrap card -->
+       <div class="card mb-3">
+           <div class="row">
+               <div class="col-md-4">
+                   <% if(campground.images.length>0){ %> 
+                     <img class="card-img-top" src="<%= campground.images[0].url %>" alt="Card image cap">
+                     <% }else{ %>
+                        <img class="card-img-top" src="https://res.cloudinary.com/dt4kdj7mp/image/upload/v1639304700/Yelpcamp/g6gonl1xl1dvayr3to81.jpg">
+                        <% } %>
+               </div>
+               <div class="col-md-8">
+                   <div class="card-body">
+                        <h5 class="card-title"><%= campground.title %> </h5>
+                        <p class="card-text"><%= campground.description %></p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <%= campground.location %>
+                            </small>
+                        </p>
+                        <a href="/campgrounds/<%= campground._id %> " class="btn btn-primary">View</a>
+                   </div>
+               </div>
+           </div>
+       </div>
+    
+      
+        <% } %> 
+    </ul>
+    <script>
+        const campgrounds={features: <%- JSON.stringify(campgrounds) %>}
+    </script>
+    <script src="/scripts/clusterMap.js">  </script>
+     
