@@ -1,16 +1,29 @@
 const Campground = require('../models/campground');
 const { cloudinary } = require('../cloudinary/config');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const Fuse = require('fuse.js');
 
 const geoCoder = mbxGeocoding({ accessToken: process.env.MAP_BOX_TOKEN });
 
 module.exports.index = async (req, res) => {
-	const campGrounds = await Campground.find({});
-	res.render('Campgrounds/Home', { campgrounds: campGrounds });
+	let campGrounds = await Campground.find({});
+	if (req.query.search) {
+		const fuse = new Fuse(campGrounds, {
+			shouldSort: true,
+			keys: [ 'title' ]
+		});
+		campGrounds = fuse.search(req.query.search);
+		let result = [];
+		campGrounds.forEach((campground) => {
+			result.push(campground.item);
+		});
+		res.render('Campgrounds/Home', { campgrounds: result });
+	} else {
+		res.render('Campgrounds/Home', { campgrounds: campGrounds });
+	}
 };
 
 module.exports.getCampground = async (req, res, next) => {
-	const id = req.params.id;
 	const campGround = await Campground.findById(req.params.id)
 		.populate({
 			path: 'reviews',
@@ -19,7 +32,12 @@ module.exports.getCampground = async (req, res, next) => {
 			}
 		})
 		.populate('author');
+
 	res.render('Campgrounds/Show', { campGround });
+};
+
+module.exports.renderNewForm = async (req, res) => {
+	res.render('Campgrounds/New');
 };
 
 module.exports.editCampground = async (req, res, next) => {

@@ -12,9 +12,7 @@ route
 	.get(catchAsync(campground.index))
 	.post(isLoggedIn, upload.array('image'), validateCampground, catchAsync(campground.createCampground));
 
-route.get('/new', isLoggedIn, (req, res) => {
-	res.render('Campgrounds/New');
-});
+route.get('/new', isLoggedIn, campground.renderNewForm);
 
 route.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campground.editCampground));
 

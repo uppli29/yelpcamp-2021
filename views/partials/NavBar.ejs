@@ -26,6 +26,8 @@
           <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt "></i> Login</a>
           <a class="nav-link" href="/register"><i class="fas fa-user-plus"></i> Register</a>
           <% }else{ %> 
+            <!-- display user name -->
+            <a class="nav-link" href="#"><i class="fas fa-user-circle"></i> <%= currentUser.username %></a>
           <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt    "></i> Logout</a>
             <% } %>
       </div>

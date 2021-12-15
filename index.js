@@ -19,8 +19,8 @@ const reviewRoute = require('./routes/reviews');
 const userRoute = require('./routes/user');
 
 console.log(process.env.api_secret);
-// 'mongodb://localhost:27017/yelp-camp'
-mongoose.connect(process.env.DB_URL, {
+
+mongoose.connect('mongodb://localhost:27017/yelp-camp', {
 	useNewUrlParser: true
 });
 
@@ -70,6 +70,7 @@ app.use((req, res, next) => {
 		req.session.returnTo = req.originalUrl;
 	}
 	res.locals.currentUser = req.user;
+	console.log(req.user);
 	res.locals.success = req.flash('success');
 	res.locals.error = req.flash('error');
 	next();
